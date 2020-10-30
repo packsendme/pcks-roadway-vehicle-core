@@ -98,7 +98,7 @@ public class Bodywork_Service {
 			if(bodyworkFindName == null) {
 				return update(id, bodyworkDto);
 			}
-			else if((bodyworkFindName != null) && (bodyworkFindName.id == id)) {
+			else if((bodyworkFindName != null) && (bodyworkFindName.id.equals(id))) {
 				return update(id, bodyworkDto);
 			}
 			else {

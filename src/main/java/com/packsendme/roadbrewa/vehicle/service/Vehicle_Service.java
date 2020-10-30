@@ -95,7 +95,7 @@ public class Vehicle_Service {
 			if(vehicleFind == null) {
 				return update(id, vehicleDto);
 			}
-			else if((vehicleFind != null) && (vehicleFind.id == id)) {
+			else if((vehicleFind != null) && (vehicleFind.id.equals(id))) {
 				return update(id, vehicleDto);
 			}
 			else {
