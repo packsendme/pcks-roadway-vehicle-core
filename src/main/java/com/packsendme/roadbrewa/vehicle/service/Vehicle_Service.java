@@ -87,27 +87,42 @@ public class Vehicle_Service {
 		}
 	}
 	
-	public ResponseEntity<?> update(String id, VehicleDto vehicleDto) {
+	public ResponseEntity<?> prepareUpdate(String id, VehicleDto vehicleDto) {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
 			Vehicle vehicleFind = vehicle_Dao.findOneByName(vehicleDto.vehicle_type);
 			if(vehicleFind == null) {
-				Optional<Vehicle> vehicleData = vehicle_Dao.findOneById(id);
-				if(vehicleData.isPresent()) {
-					Vehicle entity = vehicleObj.dtoTOentity(vehicleDto, vehicleData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
-					vehicle_Dao.update(entity);
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
-					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
-				}
-				else {
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
-					return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
-				}
+				return update(id, vehicleDto);
+			}
+			else if((vehicleFind != null) && (vehicleFind.id == id)) {
+				return update(id, vehicleDto);
 			}
 			else {
 				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
+			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	public ResponseEntity<?> update(String id, VehicleDto vehicleDto) {
+		Response<String> responseObj = null;
+		try {
+			Optional<Vehicle> vehicleData = vehicle_Dao.findOneById(id);
+			if(vehicleData.isPresent()) {
+				Vehicle entity = vehicleObj.dtoTOentity(vehicleDto, vehicleData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
+				vehicle_Dao.update(entity);
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
+				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
+			}
+			else {
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (Exception e) {

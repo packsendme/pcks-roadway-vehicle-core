@@ -66,7 +66,7 @@ public class Vehicle_Controller {
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
 			@Validated  @RequestBody VehicleDto vehicle)
 	{	
-		return vehicle_Service.update(id, vehicle);
+		return vehicle_Service.prepareUpdate(id, vehicle);
 	}
 
 	/***************************************
@@ -139,6 +139,6 @@ public class Vehicle_Controller {
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id, 
 			@Validated  @RequestBody BodyworkDto bodywork)
 	{	
-		return bodywork_Service.update(id,bodywork);
+		return bodywork_Service.prepareUpdate(id,bodywork);
 	}
 }

@@ -89,28 +89,44 @@ public class Bodywork_Service {
 		}
 	}
 	
-	public ResponseEntity<?> update(String id, BodyworkDto bodyworkDto) {
+	public ResponseEntity<?> prepareUpdate(String id, BodyworkDto bodyworkDto) {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
 			Bodywork bodyworkFindName = bodywork_Dao.findOneByName(bodyworkDto.bodyWork);
 			
 			if(bodyworkFindName == null) {
-				Optional<Bodywork> bodyWorkData = bodywork_Dao.findOneById(id);
-				if(bodyWorkData.isPresent()) {
-					Bodywork entity = bodyworkObj_Dto.dtoTOentity(bodyworkDto, bodyWorkData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
-					entity = bodywork_Dao.update(entity);
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), entity.id);
-					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
-				}
-				else {
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), null);
-					return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
-				}
+				return update(id, bodyworkDto);
+			}
+			else if((bodyworkFindName != null) && (bodyworkFindName.id == id)) {
+				return update(id, bodyworkDto);
 			}
 			else {
 				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), id);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), null);
+			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	
+	public ResponseEntity<?> update(String id, BodyworkDto bodyworkDto) {
+		Response<String> responseObj = null;
+		try {
+			Optional<Bodywork> bodyWorkData = bodywork_Dao.findOneById(id);
+			if(bodyWorkData.isPresent()) {
+				Bodywork entity = bodyworkObj_Dto.dtoTOentity(bodyworkDto, bodyWorkData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
+				entity = bodywork_Dao.update(entity);
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), entity.id);
+				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
+			}
+			else {
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_BODYWORK.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (Exception e) {
