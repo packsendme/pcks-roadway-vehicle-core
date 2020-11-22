@@ -1,5 +1,7 @@
 package com.packsendme.roadbrewa.vehicle.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,5 +16,8 @@ public interface IVehicle_Repository extends MongoRepository<Vehicle, String>{
 
 	@Query("{'vehicle_type' : ?0}")
 	Vehicle findVehicleByName(String name);
+	
+	@Query("{'transport_type' : ?0}")
+	List<Vehicle> findVehicleByTransportType(String name);
 	
 }

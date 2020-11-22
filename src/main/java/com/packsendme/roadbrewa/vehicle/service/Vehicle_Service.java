@@ -40,6 +40,21 @@ public class Vehicle_Service {
 		}
 	}
 	
+	public ResponseEntity<?> searchVehicleWithTransportType(String transport) {
+		Response<VehicleListResponse_Dto> responseObj = null;
+		VehicleListResponse_Dto vehicleListResponse_Dto = new VehicleListResponse_Dto();
+		try {
+			vehicleListResponse_Dto.vehicles = vehicleObj.entityTOdto(vehicle_Dao.findEntityByParameters(transport));
+			responseObj = new Response<VehicleListResponse_Dto>(0,HttpExceptionPackSend.CREATED_ROADWAYBRE.getAction(), vehicleListResponse_Dto);
+			return new ResponseEntity<>(responseObj, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			responseObj = new Response<VehicleListResponse_Dto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), null);
+			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	public ResponseEntity<?> save(VehicleDto vehicleDto) {
 		Response<VehicleDto> responseObj = null;
 		try {
