@@ -40,11 +40,11 @@ public class Vehicle_Service {
 		}
 	}
 	
-	public ResponseEntity<?> searchVehicleWithTransportType(String transport) {
+	public ResponseEntity<?> searchVehicleWithCargoType(String cargo) {
 		Response<VehicleListResponse_Dto> responseObj = null;
 		VehicleListResponse_Dto vehicleListResponse_Dto = new VehicleListResponse_Dto();
 		try {
-			vehicleListResponse_Dto.vehicles = vehicleObj.entityTOdto(vehicle_Dao.findEntityByParameters(transport));
+			vehicleListResponse_Dto.vehicles = vehicleObj.entityTOdto(vehicle_Dao.findEntityByParameters(cargo));
 			responseObj = new Response<VehicleListResponse_Dto>(0,HttpExceptionPackSend.CREATED_ROADWAYBRE.getAction(), vehicleListResponse_Dto);
 			return new ResponseEntity<>(responseObj, HttpStatus.OK);
 		}
