@@ -45,10 +45,10 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/cargotype")
+	@GetMapping("/vehicle/cargo")
 	public ResponseEntity<?> getVehicleForCargoType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
-			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("cargotype") String cargotype) {	
-		return vehicle_Service.searchVehicleWithCargoType(cargotype);
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("type") String type) {	
+		return vehicle_Service.searchVehicleWithCargoType(type);
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
