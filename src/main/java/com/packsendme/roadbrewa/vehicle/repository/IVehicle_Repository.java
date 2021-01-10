@@ -14,7 +14,7 @@ public interface IVehicle_Repository extends MongoRepository<Vehicle, String>{
 	@Query("{id : { $ne : ?0}, vehicle_type : ?1}")
 	Vehicle findVehicleByIdAndName(String id, String name);
 
-	@Query("{'vehicle_type' : ?0}")
+	@Query("{'vehicle_name' : ?0}")
 	Vehicle findVehicleByName(String name);
 	
 	@Query("{'transport_type' : ?0}")

@@ -58,7 +58,7 @@ public class Vehicle_Service {
 	public ResponseEntity<?> save(VehicleDto vehicleDto) {
 		Response<VehicleDto> responseObj = null;
 		try {
-			if(vehicle_Dao.findOneByName(vehicleDto.vehicle_type) == null) {
+			if(vehicle_Dao.findOneByName(vehicleDto.vehicle_name) == null) {
 				Vehicle entity = vehicleObj.dtoTOentity(vehicleDto, null, RoadwayManagerConstants.ADD_OP_ROADWAY);
 				entity = vehicle_Dao.save(entity);
 				responseObj = new Response<VehicleDto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), vehicleDto);
@@ -106,7 +106,7 @@ public class Vehicle_Service {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
-			Vehicle vehicleFind = vehicle_Dao.findOneByName(vehicleDto.vehicle_type);
+			Vehicle vehicleFind = vehicle_Dao.findOneByName(vehicleDto.vehicle_name);
 			if(vehicleFind == null) {
 				return update(id, vehicleDto);
 			}
