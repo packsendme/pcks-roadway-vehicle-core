@@ -9,7 +9,7 @@ import com.packsendme.roadbrewa.entity.VehicleType;
 @Repository
 public interface IVehicleType_Repository extends MongoRepository<VehicleType, String>{
 
-	@Query("{'type_vehicle' :  {$eq: ?0}}")
-	VehicleType findVehicleTypeByName(String type_vehicle);
+	@Query("{'name_category' :  {$eq: ?0}}")
+	VehicleType findVehicleTypeByName(String name_category);
 
 }

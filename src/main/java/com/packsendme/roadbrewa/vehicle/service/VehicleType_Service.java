@@ -90,7 +90,7 @@ public class VehicleType_Service {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
-			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.type_vehicle);
+			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.name_category);
 			if(vehicleFind == null) {
 				Optional<VehicleType> vehicleTypeData = vehicleType_Dao.findOneById(id);
 				if(vehicleTypeData.isPresent()) {
