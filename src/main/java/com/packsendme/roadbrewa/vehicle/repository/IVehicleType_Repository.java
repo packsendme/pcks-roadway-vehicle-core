@@ -14,7 +14,7 @@ public interface IVehicleType_Repository extends MongoRepository<VehicleType, St
 	@Query("{'name_category' :  {$eq: ?0}}")
 	VehicleType findVehicleTypeByName(String name_category);
 
-	@Query("{'vehicle_type' :  {$eq: ?0}}")
+	@Query("{'type_vehicle' :  {$eq: ?0}}")
 	List<VehicleType> findVehicleTypeByType(String vehicle_type);
 
 }
