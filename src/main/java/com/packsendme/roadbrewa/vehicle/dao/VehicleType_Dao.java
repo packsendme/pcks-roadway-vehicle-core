@@ -102,8 +102,13 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 
 	@Override
 	public List<VehicleType> findEntityByParameters(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return vehicleType_Rep.findVehicleTypeByType(name);
+		}
+		catch (MongoClientException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
  

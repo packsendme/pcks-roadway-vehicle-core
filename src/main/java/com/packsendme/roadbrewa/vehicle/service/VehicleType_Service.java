@@ -41,6 +41,21 @@ public class VehicleType_Service {
 		}
 	}
 	
+	public ResponseEntity<?> findVehicleTypeByType(String vehicle_type) {
+		Response<VehicleTypeListResponse_Dto> responseObj = null;
+		VehicleTypeListResponse_Dto vehicleTypeListResponse_Dto = new  VehicleTypeListResponse_Dto();
+		try {
+			vehicleTypeListResponse_Dto.vehiclesType = vehicleTypeObj.entityTOdto(vehicleType_Dao.findEntityByParameters(vehicle_type));
+			responseObj = new Response<VehicleTypeListResponse_Dto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), vehicleTypeListResponse_Dto);
+			return new ResponseEntity<>(responseObj, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			responseObj = new Response<VehicleTypeListResponse_Dto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), null);
+			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	public ResponseEntity<?> save(VehicleTypeDto vehicleTypeDto) {
 		Response<VehicleTypeDto> responseObj = null;
 		try {
