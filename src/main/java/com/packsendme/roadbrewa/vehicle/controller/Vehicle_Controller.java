@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.packsendme.roadbrewa.dto.BodyworkDto;
 import com.packsendme.roadbrewa.dto.VehicleDto;
 import com.packsendme.roadbrewa.dto.VehicleTypeDto;
+import com.packsendme.roadbrewa.dto.VehicleCategoryDto;
 import com.packsendme.roadbrewa.vehicle.service.Bodywork_Service;
+import com.packsendme.roadbrewa.vehicle.service.VehicleCategory_Service;
 import com.packsendme.roadbrewa.vehicle.service.VehicleType_Service;
 import com.packsendme.roadbrewa.vehicle.service.Vehicle_Service;
 
@@ -31,6 +33,8 @@ public class Vehicle_Controller {
 	private Vehicle_Service vehicle_Service;	
 	@Autowired
 	private VehicleType_Service vehicleType_Service;	
+	@Autowired
+	private VehicleCategory_Service vehicleCategory_Service;	
 	@Autowired
 	private Bodywork_Service bodywork_Service;	
 
@@ -78,25 +82,61 @@ public class Vehicle_Controller {
 	}
 
 	/***************************************
+	 VEHICLE_CATEGORY :: GET | POST | DELETE 
+	 ***************************************/
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/category")
+	public ResponseEntity<?> getVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
+		return vehicleCategory_Service.findAll();
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/vehicle/category/type/{vehicle_type}")
+	public ResponseEntity<?> getVehicleCategoryByType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp,
+			@PathVariable("vehicle_type") String vehicle_type) {	
+		return vehicleCategory_Service.findVehicleByType(vehicle_type);
+	}
+
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@PostMapping("/vehicle/category")
+	public ResponseEntity<?> postVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleCategoryDto vehicleCategory)
+	{	
+		return vehicleCategory_Service.save(vehicleCategory);
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@DeleteMapping("/vehicle/category")
+	public ResponseEntity<?> deleteVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
+	{	
+		return vehicleCategory_Service.delete(id);
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@PutMapping("/vehicle/category")
+	public ResponseEntity<?> putVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
+			@Validated  @RequestBody VehicleCategoryDto vehicleCategory)
+	{	
+		return vehicleCategory_Service.update(id, vehicleCategory);
+	}
+	
+
+	/***************************************
 	 VEHICLE_TYPE :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/vehicletype")
+	@GetMapping("/vehicle/type")
 	public ResponseEntity<?> getVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return vehicleType_Service.findAll();
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/vehicletype/type/{vehicle_type}")
-	public ResponseEntity<?> getVehicleTypeByType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
-			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp,
-			@PathVariable("vehicle_type") String vehicle_type) {	
-		return vehicleType_Service.findVehicleTypeByType(vehicle_type);
-	}
-
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle/vehicletype")
+	@PostMapping("/vehicle/type")
 	public ResponseEntity<?> postVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleTypeDto vehicleType)
 	{	
@@ -104,7 +144,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle/vehicletype")
+	@DeleteMapping("/vehicle/type")
 	public ResponseEntity<?> deleteVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
@@ -112,7 +152,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle/vehicletype")
+	@PutMapping("/vehicle/type")
 	public ResponseEntity<?> putVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
 			@Validated  @RequestBody VehicleTypeDto vehicleType)
@@ -120,7 +160,7 @@ public class Vehicle_Controller {
 		return vehicleType_Service.update(id, vehicleType);
 	}
 	
-
+	
 	/***************************************
 	 BODYWORK (RELASHIONSHIP - VEHICLE) <--> GET | POST | DELETE 
 	***************************************/

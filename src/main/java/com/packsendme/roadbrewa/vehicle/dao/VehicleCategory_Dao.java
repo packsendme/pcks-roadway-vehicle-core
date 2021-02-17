@@ -9,20 +9,20 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.MongoClientException;
-import com.packsendme.roadbrewa.entity.VehicleType;
-import com.packsendme.roadbrewa.vehicle.repository.IVehicleType_Repository;
+import com.packsendme.roadbrewa.entity.VehicleCategory;
+import com.packsendme.roadbrewa.vehicle.repository.IVehicleCategory_Repository;
 
 @Component
 @ComponentScan({"com.packsendme.roadbrewa.vehicle.repository"})
-public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
+public class VehicleCategory_Dao implements ICrud_Dao<VehicleCategory>{
 
 	@Autowired
-	IVehicleType_Repository vehicleType_Rep; 
+	IVehicleCategory_Repository VehicleCategory_Rep; 
 		
 	@Override
-	public VehicleType save(VehicleType entity) {
+	public VehicleCategory save(VehicleCategory entity) {
 		try {
-			return entity = vehicleType_Rep.insert(entity);
+			return entity = VehicleCategory_Rep.insert(entity);
 		}
 		catch (MongoClientException e) {
 			e.printStackTrace();
@@ -31,9 +31,9 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public Optional<VehicleType> findOneById(String id) {
+	public Optional<VehicleCategory> findOneById(String id) {
 		try {
-			return vehicleType_Rep.findById(id);
+			return VehicleCategory_Rep.findById(id);
 		}
 		catch (MongoClientException e) {
 			e.printStackTrace();
@@ -42,10 +42,10 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public List<VehicleType> findAll() {
+	public List<VehicleCategory> findAll() {
 		try {
-			List<VehicleType> entityL = new ArrayList<VehicleType>(); 
-			entityL = vehicleType_Rep.findAll();
+			List<VehicleCategory> entityL = new ArrayList<VehicleCategory>(); 
+			entityL = VehicleCategory_Rep.findAll();
 			return entityL;
 		}
 		catch (MongoClientException e) {
@@ -55,9 +55,9 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public Boolean remove(VehicleType entity) {
+	public Boolean remove(VehicleCategory entity) {
 		try {
-			vehicleType_Rep.delete(entity);
+			VehicleCategory_Rep.delete(entity);
 			return true;
 		}
 		catch (Exception e) {
@@ -67,9 +67,9 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public VehicleType update(VehicleType entity) {
+	public VehicleCategory update(VehicleCategory entity) {
 		try {
-			VehicleType entityModel =  vehicleType_Rep.save(entity);
+			VehicleCategory entityModel =  VehicleCategory_Rep.save(entity);
 			return entityModel; 
 		}
 		catch (Exception e) {
@@ -79,7 +79,18 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public VehicleType findOneByName(String name) {
+	public VehicleCategory findOneByName(String name) {
+		try {
+			return VehicleCategory_Rep.findVehicleByType(name);
+		}
+		catch (MongoClientException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public VehicleCategory findOneByIdAndName(String id, String name) {
 		try {
 			return null;
 		}
@@ -90,20 +101,9 @@ public class VehicleType_Dao implements ICrud_Dao<VehicleType>{
 	}
 
 	@Override
-	public VehicleType findOneByIdAndName(String id, String name) {
+	public List<VehicleCategory> findEntityByParameters(String name) {
 		try {
 			return null;
-		}
-		catch (MongoClientException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@Override
-	public List<VehicleType> findEntityByParameters(String name) {
-		try {
-			return vehicleType_Rep.findVehicleTypeByType(name);
 		}
 		catch (MongoClientException e) {
 			e.printStackTrace();
