@@ -45,7 +45,7 @@ public class VehicleCategory_Service {
 	public ResponseEntity<?> findVehicleByType(String vehicle_type) {
 		Response<VehicleCategoryDto> responseObj = null;
 		try {
-			VehicleCategoryDto vehicleCategoryDto  = vehicleCategoryObj.entityTOdto(vehicleCategory_Dao.findOneByName(vehicle_type));
+			VehicleCategoryDto vehicleCategoryDto  = vehicleCategoryObj.entityTOdtoObj(vehicleCategory_Dao.findOneByName(vehicle_type));
 			responseObj = new Response<VehicleCategoryDto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), vehicleCategoryDto);
 			return new ResponseEntity<>(responseObj, HttpStatus.OK);
 		}
