@@ -105,23 +105,12 @@ public class VehicleType_Service {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
-			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.name_category);
-			if(vehicleFind == null) {
-				Optional<VehicleType> vehicleTypeData = vehicleType_Dao.findOneById(id);
-				if(vehicleTypeData.isPresent()) {
-					VehicleType entity = vehicleTypeObj.dtoTOentity(vehicleTypeDto, vehicleTypeData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
-					vehicleType_Dao.update(entity);
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
-					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
-				}
-				else {
-					responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
-					return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
-				}
+			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.vehicle_model);
+			if((vehicleFind != null) && (vehicleFind.vehicle_model.equals(vehicleTypeDto.vehicle_model))) {
+				return executeUpdate(id, vehicleTypeDto);
 			}
-			else {
-				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
-				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
+			else if((vehicleFind == null) && (vehicleFind.vehicle_model.equals(vehicleTypeDto.vehicle_model))) {
+				return executeUpdate(id, vehicleTypeDto);
 			}
 		}
 		catch (Exception e) {
@@ -129,5 +118,33 @@ public class VehicleType_Service {
 			responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
 		}
+		return null;
 	}
+	
+	public ResponseEntity<?> executeUpdate(String id, VehicleTypeDto vehicleTypeDto) {
+		Response<String> responseObj = null;
+
+		try {
+			Optional<VehicleType> vehicleTypeData = vehicleType_Dao.findOneById(id);
+			if(vehicleTypeData.isPresent()) {
+				VehicleType entity = vehicleTypeObj.dtoTOentity(vehicleTypeDto, vehicleTypeData.get(), RoadwayManagerConstants.UPDATE_OP_ROADWAY);
+				vehicleType_Dao.update(entity);
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), id);
+				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
+			}
+			else {
+				responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			responseObj = new Response<String>(0,HttpExceptionPackSend.UPDATE_VEHICLE.getAction(), null);
+			return new ResponseEntity<>(responseObj, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	
+	
 }
