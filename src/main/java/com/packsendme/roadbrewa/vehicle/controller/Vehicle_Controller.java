@@ -85,7 +85,7 @@ public class Vehicle_Controller {
 	 VEHICLE_CATEGORY :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/category")
+	@GetMapping("/vehicle/category")
 	public ResponseEntity<?> getVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return vehicleCategory_Service.findAll();
