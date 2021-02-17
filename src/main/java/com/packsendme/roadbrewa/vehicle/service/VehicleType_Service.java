@@ -105,11 +105,11 @@ public class VehicleType_Service {
 		Response<String> responseObj = null;
 		try {
 			// Check if exist same bodywork in Database
-			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.vehicle_model);
-			if((vehicleFind != null) && (vehicleFind.vehicle_model.equals(vehicleTypeDto.vehicle_model))) {
+			VehicleType vehicleFind = vehicleType_Dao.findOneByName(vehicleTypeDto.type_vehicle);
+			if(vehicleFind == null) {
 				return executeUpdate(id, vehicleTypeDto);
 			}
-			else if((vehicleFind == null) && (vehicleFind.vehicle_model.equals(vehicleTypeDto.vehicle_model))) {
+			else if((vehicleFind != null) && (vehicleFind.type_vehicle.equals(vehicleTypeDto.type_vehicle))) {
 				return executeUpdate(id, vehicleTypeDto);
 			}
 		}
