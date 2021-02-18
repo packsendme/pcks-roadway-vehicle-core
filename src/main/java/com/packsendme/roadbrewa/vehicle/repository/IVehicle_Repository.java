@@ -11,10 +11,10 @@ import com.packsendme.roadbrewa.entity.Vehicle;
 @Repository
 public interface IVehicle_Repository extends MongoRepository<Vehicle, String>{
 
-	@Query("{id : { $ne : ?0}, vehicle_type : ?1}")
+	@Query("{id : { $ne : ?0}, type_vehicle : ?1}")
 	Vehicle findVehicleByIdAndName(String id, String name);
 
-	@Query("{'vehicle_name' : ?0}")
+	@Query("{'category_name' : ?0}")
 	Vehicle findVehicleByName(String name);
 	
 	@Query("{'transport_type' : ?0}")
