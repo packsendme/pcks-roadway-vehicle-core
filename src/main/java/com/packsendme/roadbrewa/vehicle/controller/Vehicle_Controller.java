@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.packsendme.roadbrewa.dto.BodyworkDto;
 import com.packsendme.roadbrewa.dto.VehicleDto;
 import com.packsendme.roadbrewa.dto.VehicleTypeDto;
-import com.packsendme.roadbrewa.dto.VehicleCategoryDto;
+import com.packsendme.roadbrewa.dto.VehicleClassificationDto;
 import com.packsendme.roadbrewa.vehicle.service.Bodywork_Service;
-import com.packsendme.roadbrewa.vehicle.service.VehicleCategory_Service;
+import com.packsendme.roadbrewa.vehicle.service.VehicleClassification_Service;
 import com.packsendme.roadbrewa.vehicle.service.VehicleType_Service;
 import com.packsendme.roadbrewa.vehicle.service.Vehicle_Service;
 
@@ -34,7 +34,7 @@ public class Vehicle_Controller {
 	@Autowired
 	private VehicleType_Service vehicleType_Service;	
 	@Autowired
-	private VehicleCategory_Service vehicleCategory_Service;	
+	private VehicleClassification_Service vehicleClassification_Service;	
 	@Autowired
 	private Bodywork_Service bodywork_Service;	
 
@@ -85,43 +85,43 @@ public class Vehicle_Controller {
 	 VEHICLE_CATEGORY :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/category")
-	public ResponseEntity<?> getVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+	@GetMapping("/vehicle/classification")
+	public ResponseEntity<?> getVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
-		return vehicleCategory_Service.findAll();
+		return vehicleClassification_Service.findAll();
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/category/type/{vehicle_type}")
-	public ResponseEntity<?> getVehicleCategoryByType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+	@GetMapping("/vehicle/classification/type/{vehicle_type}")
+	public ResponseEntity<?> getVehicleClassificationByType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp,
 			@PathVariable("vehicle_type") String vehicle_type) {	
-		return vehicleCategory_Service.findVehicleByType(vehicle_type);
+		return vehicleClassification_Service.findVehicleByType(vehicle_type);
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle/category")
-	public ResponseEntity<?> postVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
-			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleCategoryDto vehicleCategory)
+	@PostMapping("/vehicle/classification")
+	public ResponseEntity<?> postVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleClassificationDto vehicleCategory)
 	{	
-		return vehicleCategory_Service.save(vehicleCategory);
+		return vehicleClassification_Service.save(vehicleCategory);
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle/category")
-	public ResponseEntity<?> deleteVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+	@DeleteMapping("/vehicle/classification")
+	public ResponseEntity<?> deleteVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
-		return vehicleCategory_Service.delete(id);
+		return vehicleClassification_Service.delete(id);
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle/category")
-	public ResponseEntity<?> putVehicleCategory(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
+	@PutMapping("/vehicle/classification")
+	public ResponseEntity<?> putVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
-			@Validated  @RequestBody VehicleCategoryDto vehicleCategory)
+			@Validated  @RequestBody VehicleClassificationDto vehicleCategory)
 	{	
-		return vehicleCategory_Service.update(id, vehicleCategory);
+		return vehicleClassification_Service.update(id, vehicleCategory);
 	}
 	
 
