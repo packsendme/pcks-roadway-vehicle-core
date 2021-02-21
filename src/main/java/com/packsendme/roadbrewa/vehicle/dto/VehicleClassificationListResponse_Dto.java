@@ -18,11 +18,11 @@ public class VehicleClassificationListResponse_Dto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public List<VehicleClassificationDto> vehiclesCategory = new ArrayList<VehicleClassificationDto>();
+	public List<VehicleClassificationDto> vehiclesClassification = new ArrayList<VehicleClassificationDto>();
 
-	public VehicleClassificationListResponse_Dto(List<VehicleClassificationDto> vehiclesCategory) {
+	public VehicleClassificationListResponse_Dto(List<VehicleClassificationDto> vehiclesClassification) {
 		super();
-		this.vehiclesCategory = vehiclesCategory;
+		this.vehiclesClassification = vehiclesClassification;
 	}
 
 	public VehicleClassificationListResponse_Dto() {

@@ -82,7 +82,7 @@ public class Vehicle_Controller {
 	}
 
 	/***************************************
-	 VEHICLE_CATEGORY :: GET | POST | DELETE 
+	 VEHICLE_CLASSIFICATION :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/vehicle/classification")

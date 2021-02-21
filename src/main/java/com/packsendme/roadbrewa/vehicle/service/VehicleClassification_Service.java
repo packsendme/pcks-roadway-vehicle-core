@@ -30,7 +30,7 @@ public class VehicleClassification_Service {
 		Response<VehicleClassificationListResponse_Dto> responseObj = null;
 		VehicleClassificationListResponse_Dto vehicleResponse_Dto = new  VehicleClassificationListResponse_Dto();
 		try {
-			vehicleResponse_Dto.vehiclesCategory = vehicleClassificationObj.entityTOdto(vehicleCategory_Dao.findAll());
+			vehicleResponse_Dto.vehiclesClassification = vehicleClassificationObj.entityTOdto(vehicleCategory_Dao.findAll());
 			responseObj = new Response<VehicleClassificationListResponse_Dto>(0,HttpExceptionPackSend.CREATED_VEHICLE.getAction(), vehicleResponse_Dto);
 			return new ResponseEntity<>(responseObj, HttpStatus.OK);
 		}
