@@ -40,7 +40,7 @@ public class Vehicle_Controller {
 
 	
 	/***************************************
-	 VEHICLE :: GET | POST | DELETE 
+	 VEHICLE ::: GET | POST | DELETE TYPE
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/vehicle")
