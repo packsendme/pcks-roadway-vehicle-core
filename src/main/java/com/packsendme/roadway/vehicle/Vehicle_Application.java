@@ -1,4 +1,4 @@
-package com.packsendme.roadbrewa.vehicle;
+package com.packsendme.roadway.vehicle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.packsendme.roadbrewa.vehicle.dao;
+package com.packsendme.roadway.vehicle.dao;
 
 import java.util.List;
 import java.util.Optional;

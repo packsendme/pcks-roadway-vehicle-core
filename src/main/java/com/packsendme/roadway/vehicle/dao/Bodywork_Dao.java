@@ -1,4 +1,4 @@
-package com.packsendme.roadbrewa.vehicle.dao;
+package com.packsendme.roadway.vehicle.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.MongoClientException;
-import com.packsendme.roadbrewa.entity.Bodywork;
-import com.packsendme.roadbrewa.vehicle.repository.IBodywork_Repository;
+import com.packsendme.roadway.commons.entity.Bodywork;
+import com.packsendme.roadway.vehicle.repository.IBodywork_Repository;
 
 @Component
-@ComponentScan({"com.packsendme.roadbrewa.vehicle.repository"})
+@ComponentScan({"com.packsendme.roadway.vehicle.repository"})
 public class Bodywork_Dao implements ICrud_Dao<Bodywork> {
 
 	@Autowired

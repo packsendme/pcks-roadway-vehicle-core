@@ -1,4 +1,4 @@
-package com.packsendme.roadbrewa.vehicle.controller;
+package com.packsendme.roadway.vehicle.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.packsendme.roadbrewa.dto.BodyworkDto;
-import com.packsendme.roadbrewa.dto.VehicleDto;
-import com.packsendme.roadbrewa.dto.VehicleTypeDto;
-import com.packsendme.roadbrewa.dto.VehicleClassificationDto;
-import com.packsendme.roadbrewa.vehicle.service.Bodywork_Service;
-import com.packsendme.roadbrewa.vehicle.service.VehicleClassification_Service;
-import com.packsendme.roadbrewa.vehicle.service.VehicleType_Service;
-import com.packsendme.roadbrewa.vehicle.service.Vehicle_Service;
+import com.packsendme.roadway.commons.dto.BodyworkDto;
+import com.packsendme.roadway.commons.dto.VehicleDto;
+import com.packsendme.roadway.commons.dto.VehicleTypeDto;
+import com.packsendme.roadway.vehicle.service.Bodywork_Service;
+import com.packsendme.roadway.vehicle.service.VehicleClassification_Service;
+import com.packsendme.roadway.vehicle.service.VehicleType_Service;
+import com.packsendme.roadway.vehicle.service.Vehicle_Service;
+import com.packsendme.roadway.commons.dto.VehicleClassificationDto;
 
 @RestController
-@RequestMapping("/roadbrewa")
+@RequestMapping("/roadway/vehicle")
 public class Vehicle_Controller {
 
 	
@@ -43,21 +43,21 @@ public class Vehicle_Controller {
 	 VEHICLE ::: GET | POST | DELETE TYPE
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle")
+	@GetMapping("/")
 	public ResponseEntity<?> getVehicles(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return vehicle_Service.findAll();
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/cargo")
+	@GetMapping("/cargo")
 	public ResponseEntity<?> getVehicleForCargoType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("type") String type) {	
 		return vehicle_Service.searchVehicleWithCargoType(type);
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle")
+	@PostMapping("/")
 	public ResponseEntity<?> postVehicle(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleDto vehicle)
 	{	
@@ -65,7 +65,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle")
+	@DeleteMapping("/")
 	public ResponseEntity<?> deleteVehicle(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
@@ -73,7 +73,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle")
+	@PutMapping("/")
 	public ResponseEntity<?> putVehicle(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
 			@Validated  @RequestBody VehicleDto vehicle)
@@ -85,14 +85,14 @@ public class Vehicle_Controller {
 	 VEHICLE_CLASSIFICATION :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/classification")
+	@GetMapping("/classification")
 	public ResponseEntity<?> getVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return vehicleClassification_Service.findAll();
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/classification/type/{vehicle_type}")
+	@GetMapping("/classification/type/{vehicle_type}")
 	public ResponseEntity<?> getVehicleClassificationByType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp,
 			@PathVariable("vehicle_type") String vehicle_type) {	
@@ -100,7 +100,7 @@ public class Vehicle_Controller {
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle/classification")
+	@PostMapping("/classification")
 	public ResponseEntity<?> postVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleClassificationDto vehicleCategory)
 	{	
@@ -108,7 +108,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle/classification")
+	@DeleteMapping("/classification")
 	public ResponseEntity<?> deleteVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
@@ -116,7 +116,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle/classification")
+	@PutMapping("/classification")
 	public ResponseEntity<?> putVehicleClassification(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
 			@Validated  @RequestBody VehicleClassificationDto vehicleCategory)
@@ -129,14 +129,14 @@ public class Vehicle_Controller {
 	 VEHICLE_TYPE :: GET | POST | DELETE 
 	 ***************************************/
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/type")
+	@GetMapping("/type")
 	public ResponseEntity<?> getVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return vehicleType_Service.findAll();
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle/type")
+	@PostMapping("/type")
 	public ResponseEntity<?> postVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated  @RequestBody VehicleTypeDto vehicleType)
 	{	
@@ -144,7 +144,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle/type")
+	@DeleteMapping("/type")
 	public ResponseEntity<?> deleteVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
@@ -152,7 +152,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle/type")
+	@PutMapping("/type")
 	public ResponseEntity<?> putVehicleType(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id,
 			@Validated  @RequestBody VehicleTypeDto vehicleType)
@@ -166,14 +166,14 @@ public class Vehicle_Controller {
 	***************************************/
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/vehicle/bodywork")
+	@GetMapping("/bodywork")
 	public ResponseEntity<?> getBodywork(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp) {	
 		return bodywork_Service.findAll();
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping("/vehicle/bodywork")
+	@PostMapping("/bodywork")
 	public ResponseEntity<?> postBodywork(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp,
 			@Validated  @RequestBody BodyworkDto bodywork)
@@ -182,7 +182,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/vehicle/bodywork")
+	@DeleteMapping("/bodywork")
 	public ResponseEntity<?> deleteBodywork(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id)
 	{	
@@ -190,7 +190,7 @@ public class Vehicle_Controller {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PutMapping("/vehicle/bodywork")
+	@PutMapping("/bodywork")
 	public ResponseEntity<?> putBodywork(@RequestHeader("isoLanguageCode") String isoLanguageCode,@RequestHeader("isoCountryCode") String isoCountryCode,
 			@RequestHeader("isoCurrencyCode") String isoCurrencyCode,@RequestHeader("originApp") String originApp, @Validated @RequestParam("id") String id, 
 			@Validated  @RequestBody BodyworkDto bodywork)

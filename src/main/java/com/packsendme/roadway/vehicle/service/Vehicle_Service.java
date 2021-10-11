@@ -1,4 +1,4 @@
-package com.packsendme.roadbrewa.vehicle.service;
+package com.packsendme.roadway.vehicle.service;
 
 import java.util.Optional;
 
@@ -8,13 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.packsendme.lib.common.constants.generic.HttpExceptionPackSend;
-import com.packsendme.lib.common.response.Response;
-import com.packsendme.roadbrewa.component.RoadwayManagerConstants;
-import com.packsendme.roadbrewa.dto.VehicleDto;
-import com.packsendme.roadbrewa.entity.Vehicle;
-import com.packsendme.roadbrewa.vehicle.dao.Vehicle_Dao;
-import com.packsendme.roadbrewa.vehicle.dto.VehicleListResponse_Dto;
+import com.packsendme.cross.common.constants.generic.HttpExceptionPackSend;
+import com.packsendme.cross.common.response.Response;
+import com.packsendme.roadway.commons.constants.RoadwayManagerConstants;
+import com.packsendme.roadway.commons.dto.VehicleDto;
+import com.packsendme.roadway.commons.entity.Vehicle;
+import com.packsendme.roadway.vehicle.dao.Vehicle_Dao;
+import com.packsendme.roadway.vehicle.dto.VehicleListResponse_Dto;
 
 @Service
 @ComponentScan({"com.packsendme.roadbrewa.vehicle.dao"})

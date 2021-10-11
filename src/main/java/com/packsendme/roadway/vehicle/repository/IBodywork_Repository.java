@@ -1,10 +1,10 @@
-package com.packsendme.roadbrewa.vehicle.repository;
+package com.packsendme.roadway.vehicle.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.packsendme.roadbrewa.entity.Bodywork;
+import com.packsendme.roadway.commons.entity.Bodywork;
 
 @Repository
 public interface IBodywork_Repository extends MongoRepository<Bodywork, String>{

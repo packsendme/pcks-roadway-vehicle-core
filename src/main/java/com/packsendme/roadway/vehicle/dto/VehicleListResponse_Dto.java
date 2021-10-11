@@ -1,10 +1,10 @@
-package com.packsendme.roadbrewa.vehicle.dto;
+package com.packsendme.roadway.vehicle.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.packsendme.roadbrewa.dto.VehicleDto;
+import com.packsendme.roadway.commons.dto.VehicleDto;
 
 import lombok.Getter;
 import lombok.Setter;
